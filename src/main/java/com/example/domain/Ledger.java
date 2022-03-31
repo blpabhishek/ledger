@@ -3,10 +3,10 @@ package com.example.domain;
 import java.util.HashMap;
 
 public class Ledger {
-    HashMap<String, LoanCalculator> transactions = new HashMap<String, LoanCalculator>();
+    HashMap<String, Loan> transactions = new HashMap<String, Loan>();
 
-    public void addLoan(String name, LoanCalculator loanCalculator) {
-        transactions.put(name,loanCalculator);
+    public void addLoan(String name, Loan loan) {
+        transactions.put(name, loan);
     }
 
     public int count() {
@@ -15,7 +15,7 @@ public class Ledger {
 
     public Status getBalance(String name, int terms) {
         //TODO throw Exception for not found
-        LoanCalculator loanCalculator = transactions.getOrDefault(name,new LoanCalculator(0,1,0));
-        return new Status(loanCalculator.amountPaid(terms), loanCalculator.remainingEMI(terms));
+        Loan loan = transactions.getOrDefault(name,new Loan(0,1,0));
+        return new Status(loan.amountPaid(terms), loan.remainingEMI(terms));
     }
 }

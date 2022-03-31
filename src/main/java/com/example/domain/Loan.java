@@ -1,11 +1,11 @@
 package com.example.domain;
 
-public class LoanCalculator {
+public class Loan {
     private final double amount;
     private final int year;
     private final float rate;
 
-    public LoanCalculator(double amount, int year, float rate) {
+    public Loan(double amount, int year, float rate) {
         this.amount = amount;
         this.year = year;
         this.rate = rate;

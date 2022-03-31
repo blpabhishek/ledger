@@ -8,14 +8,14 @@ public class LedgerTest {
     @Test
     void ledgerShouldRecordTheTransaction() {
         Ledger ledger = new Ledger();
-        ledger.addLoan("name", new LoanCalculator(200, 2, 2));
+        ledger.addLoan("name", new Loan(200, 2, 2));
 
         assertEquals(1,ledger.count());
     }
     @Test
     void ledgerShouldGiveTheStatusForTheGivenUser() {
         Ledger ledger = new Ledger();
-        ledger.addLoan("name", new LoanCalculator(2000, 2, 2));
+        ledger.addLoan("name", new Loan(2000, 2, 2));
         Status status = ledger.getBalance("name",8);
 
         int amountPaid = 696;
