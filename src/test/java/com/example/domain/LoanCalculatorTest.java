@@ -1,4 +1,4 @@
-package com.example;
+package com.example.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +43,13 @@ public class LoanCalculatorTest {
         int remainingEMIs = loanCalculator.remainingEMI(4);
 
         assertEquals(20, remainingEMIs);
+    }
+
+    @Test
+    void shouldGetPaidAmount() {
+        LoanCalculator loanCalculator = new LoanCalculator(2000, 2, 2);
+        long amountPaid = loanCalculator.amountPaid(4);
+
+        assertEquals(348, amountPaid);
     }
 }

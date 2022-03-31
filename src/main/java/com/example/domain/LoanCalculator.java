@@ -1,4 +1,4 @@
-package com.example;
+package com.example.domain;
 
 public class LoanCalculator {
     private final double amount;
@@ -20,7 +20,11 @@ public class LoanCalculator {
     }
 
     public long remainingAmount(int terms) {
-        return totalAmount() - (terms * monthlyEMI());
+        return totalAmount() - amountPaid(terms);
+    }
+
+    public long amountPaid(int terms) {
+        return(terms * monthlyEMI());
     }
 
     public int remainingEMI(int terms) {
