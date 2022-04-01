@@ -1,5 +1,9 @@
 package com.example.parser;
 
+import com.example.domain.Ledger;
+import com.example.domain.Loan;
+import com.example.domain.Status;
+
 import java.util.Objects;
 
 public class LoanCommand implements Command {
@@ -28,5 +32,11 @@ public class LoanCommand implements Command {
     @Override
     public int hashCode() {
         return Objects.hash(bank, name, amount, years, terms);
+    }
+
+    public Status execute(Ledger ledger) {
+        Loan loan = new Loan(amount, years, terms);
+        ledger.addLoan(name,loan);
+        return ledger.getBalance(name,0);
     }
 }
