@@ -1,6 +1,5 @@
 package com.example.domain;
 
-import com.example.Ledgers;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
