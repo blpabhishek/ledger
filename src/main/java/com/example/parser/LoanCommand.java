@@ -2,7 +2,7 @@ package com.example.parser;
 
 import java.util.Objects;
 
-public class LoanCommand {
+public class LoanCommand implements Command {
     private final String bank;
     private final String name;
     private final int amount;
