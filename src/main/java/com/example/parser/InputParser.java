@@ -6,7 +6,7 @@ public class InputParser {
     public Command parse(String string) throws InvalidCommandException {
         String[] arguments = string.split(" ");
         if (arguments.length < 4) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException(string);
         }
         String commandName = arguments[0];
         if (commandName.equals("LOAN"))
@@ -15,7 +15,7 @@ public class InputParser {
             return PaymentCommand.toPaymentCommand(arguments);
         if (commandName.equals("BALANCE"))
             return BalanceCommand.toBalanceCommand(arguments);
-        throw new InvalidCommandException();
+        throw new InvalidCommandException(string);
     }
 
 }

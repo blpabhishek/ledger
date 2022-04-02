@@ -52,7 +52,7 @@ public class LoanCommand implements Command {
         try {
             return new LoanCommand(args[1], args[2], parseInt(args[3]), parseInt(args[4]), parseInt(args[5]));
         } catch (Exception e) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException(String.join(" ",args));
         }
     }
 }

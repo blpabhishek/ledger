@@ -35,7 +35,7 @@ public class PaymentCommand implements Command {
         try {
             return new PaymentCommand(args[1], args[2], parseInt(args[3]), parseInt(args[4]));
         } catch (Exception e) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException(String.join(" ",args));
         }
     }
 

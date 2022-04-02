@@ -31,7 +31,7 @@ public class BalanceCommand implements Command {
         try {
             return new BalanceCommand(args[1], args[2], Integer.parseInt(args[3]));
         } catch (Exception e) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException(String.join(" ", args));
         }
     }
 
