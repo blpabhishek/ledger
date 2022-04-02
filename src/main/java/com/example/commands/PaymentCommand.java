@@ -4,7 +4,7 @@ import com.example.domain.Ledger;
 import com.example.domain.Status;
 import com.example.domain.UnknownUserException;
 
-public class PaymentCommand implements Command{
+public class PaymentCommand implements Command {
     private final String bank;
     private final String name;
     private final int lumSumAmount;
@@ -19,8 +19,7 @@ public class PaymentCommand implements Command{
 
     @Override
     public Status execute(Ledger ledger) throws UnknownUserException {
-        ledger.getBalance(name,emiTerms);
-        return new Status("IDI",1000,12);
+        return ledger.payment(name, lumSumAmount, emiTerms);
     }
 
     @Override

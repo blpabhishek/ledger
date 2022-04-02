@@ -20,7 +20,7 @@ public class LedgerTest {
         ledger.addLoan("name", new Loan(2000, 2, 2));
         Status status = ledger.getBalance("name", 8);
 
-        Status expectedStatus = new Status("IDI",696, 16);
+        Status expectedStatus = new Status("IDI", 696, 16);
 
         assertEquals(expectedStatus, status);
     }
@@ -31,5 +31,23 @@ public class LedgerTest {
         assertThrows(UnknownUserException.class,
                 () -> ledger.getBalance("name", 8));
 
+    }
+
+    @Test
+    void shouldAcceptLumSumPaymentForAnExistingUser() throws UnknownUserException {
+        Ledger ledger = new Ledger("IDI");
+        ledger.addLoan("name", new Loan(1200, 1, 0));
+        Status status = ledger.payment("name", 1000, 2);
+
+        Status expectedStatus = new Status("IDI", 1200, 0);
+        assertEquals(expectedStatus, status);
+    }
+
+    @Test
+    void shouldThrowExceptionForUnknownUserPayment() throws UnknownUserException {
+        Ledger ledger = new Ledger("IDI");
+        assertThrows(UnknownUserException.class, () -> {
+            ledger.payment("name", 1000, 2);
+        });
     }
 }

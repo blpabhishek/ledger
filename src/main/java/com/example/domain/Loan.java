@@ -4,6 +4,7 @@ public class Loan {
     private final double amount;
     private final int year;
     private final float rate;
+    private final Payments payments = new Payments();
 
     public Loan(double amount, int year, float rate) {
         this.amount = amount;
@@ -19,16 +20,22 @@ public class Loan {
         return round(totalAmount() / timeInMonths());
     }
 
-    public long remainingAmount(int terms) {
+    private long remainingAmount(int terms) {
         return totalAmount() - amountPaid(terms);
     }
 
+    public void addPayment(long lumSumAmount, int afterEmiTerms) {
+        Payment payment = new Payment(afterEmiTerms, lumSumAmount);
+        this.payments.add(payment);
+    }
+
     public long amountPaid(int terms) {
-        return(terms * monthlyEMI());
+        long paidAsLumSum = payments.paymentsAfter(terms);
+        return (terms * monthlyEMI()) + paidAsLumSum;
     }
 
     public int remainingEMI(int terms) {
-        return (int) timeInMonths() - terms;
+        return (int) round((float) remainingAmount(terms) / (monthlyEMI()));
     }
 
     private long round(double i) {

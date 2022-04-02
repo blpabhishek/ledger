@@ -30,14 +30,6 @@ public class LoanTest {
     }
 
     @Test
-    void shouldGetRemainingBalanceAfterTheNumberOfEMIsBeenPaid() {
-        Loan loan = new Loan(2000, 2, 2);
-        long outstanding = loan.remainingAmount(4);
-
-        assertEquals(1732, outstanding);
-    }
-
-    @Test
     void shouldGetRemainingNumberOfEMIsToBePaid() {
         Loan loan = new Loan(2000, 2, 2);
         int remainingEMIs = loan.remainingEMI(4);
@@ -51,5 +43,27 @@ public class LoanTest {
         long amountPaid = loan.amountPaid(4);
 
         assertEquals(348, amountPaid);
+    }
+
+    @Test
+    void shouldAcceptLumSumPaymentForTheLoan() {
+        Loan loan = new Loan(1200, 1, 0);
+        loan.addPayment(1000, 2);
+
+        long amountPaid = loan.amountPaid(2);
+        int remainingEMI = loan.remainingEMI(2);
+        assertEquals(1200, amountPaid);
+        assertEquals(0, remainingEMI);
+    }
+
+    @Test
+    void shouldNotAddTheLumSumAmountInTotalForOlderPayments() {
+        Loan loan = new Loan(5000, 1, 6);
+        loan.addPayment(1000,5);
+        int remainingEMI = loan.remainingEMI(3);
+        assertEquals(9,remainingEMI);
+
+        int remainingEMIAfterPayment = loan.remainingEMI(6);
+        assertEquals(4,remainingEMIAfterPayment);
     }
 }

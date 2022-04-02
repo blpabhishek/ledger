@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PaymentCommandTest {
+public class PaymentsCommandTest {
     @Test
     void shouldBeAbleToPayForAnExistingLoan() throws UnknownUserException {
-        PaymentCommand paymentCommand = new PaymentCommand("IDI", "Bob", 1000, 0);
+        PaymentCommand paymentCommand = new PaymentCommand("IDI", "Bob", 5000, 0);
         Ledger ledger = new Ledger("IDI");
-        ledger.addLoan("Bob", new Loan(10000, 1, 1));
+        ledger.addLoan("Bob", new Loan(12000, 1, 0));
         Status status = paymentCommand.execute(ledger);
 
-        Status expectedStatus = new Status("IDI", 1000, 12);
+        Status expectedStatus = new Status("IDI", 5000, 7);
         assertEquals(expectedStatus, status);
     }
 
