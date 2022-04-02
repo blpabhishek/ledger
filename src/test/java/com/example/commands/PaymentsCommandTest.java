@@ -16,7 +16,7 @@ public class PaymentsCommandTest {
         ledger.addLoan("Bob", new Loan(12000, 1, 0));
         CommandResult commandResult = paymentCommand.execute(ledger);
 
-        CommandResult expectedCommandResult = new CommandResult("IDI", 5000, 7);
+        CommandResult expectedCommandResult = new CommandResult(CommandType.LOAN, "IDI", "5000", "7");
         assertEquals(expectedCommandResult, commandResult);
     }
 

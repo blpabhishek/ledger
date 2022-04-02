@@ -10,8 +10,7 @@ public class InputParserTest {
     @Test
     void shouldBeAbleToParseTheGivenString() throws InvalidCommandException {
         String string = "LOAN IDIDI Dale 10000 5 4";
-        InputParser inputParser = new InputParser();
-        Command lc = inputParser.parse(string);
+        Command lc = InputParser.parse(string);
 
         LoanCommand expected = new LoanCommand("IDIDI", "Dale", 10000, 5, 4);
 
@@ -21,8 +20,7 @@ public class InputParserTest {
     @Test
     void shouldBeAbleToParseTheGivenBalanceCommand() throws InvalidCommandException {
         String string = "BALANCE IDIDI Dale 5";
-        InputParser inputParser = new InputParser();
-        Command lc = inputParser.parse(string);
+        Command lc = InputParser.parse(string);
 
         Command expected = new BalanceCommand("IDIDI", "Dale", 5);
 
@@ -32,8 +30,7 @@ public class InputParserTest {
     @Test
     void shouldBeAbleToParsePaymentCommand() throws InvalidCommandException {
         String string = "PAYMENT IDIDI Dale 1000 5";
-        InputParser inputParser = new InputParser();
-        Command lc = inputParser.parse(string);
+        Command lc = InputParser.parse(string);
 
         Command expected = new PaymentCommand("IDIDI", "Dale", 1000,5);
 
@@ -43,9 +40,8 @@ public class InputParserTest {
     @Test
     void shouldThrowInvalidCommandExceptionOnInvalidCommands() {
         String string = "PAY";
-        InputParser inputParser = new InputParser();
 
-        assertThrows(InvalidCommandException.class,()->inputParser.parse(string));
+        assertThrows(InvalidCommandException.class,()->InputParser.parse(string));
 
     }
 }

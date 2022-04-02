@@ -3,7 +3,7 @@ package com.example.parser;
 import com.example.commands.*;
 
 public class InputParser {
-    public Command parse(String string) throws InvalidCommandException {
+    public static Command parse(String string) throws InvalidCommandException {
         String[] arguments = string.split(" ");
         if (arguments.length < 4) {
             throw new InvalidCommandException(string);

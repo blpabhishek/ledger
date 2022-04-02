@@ -8,6 +8,7 @@ import com.example.domain.UnknownUserException;
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.String.valueOf;
 
 public class LoanCommand implements Command {
     private final String bank;
@@ -28,7 +29,9 @@ public class LoanCommand implements Command {
         Loan loan = new Loan(amount, years, terms);
         ledger.addLoan(name, loan);
         Balance balance = ledger.accountBalance(name, 0);
-        return new CommandResult(bank, balance.amountPaid(), balance.noOfEmisLeft());
+        String amount = valueOf(balance.amountPaid());
+        String emiLeft = valueOf(balance.noOfEmisLeft());
+        return new CommandResult(CommandType.LOAN, bank, amount, emiLeft);
     }
 
     @Override

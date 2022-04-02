@@ -7,6 +7,7 @@ import com.example.domain.UnknownUserException;
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.String.valueOf;
 
 public class PaymentCommand implements Command {
     private final String bank;
@@ -24,8 +25,10 @@ public class PaymentCommand implements Command {
     @Override
     public CommandResult execute(Ledger ledger) throws UnknownUserException {
         ledger.payment(name, lumSumAmount, emiTerms);
-        Balance balance = ledger.accountBalance(name,emiTerms);
-        return new CommandResult(bank, balance.amountPaid(), balance.noOfEmisLeft());
+        Balance balance = ledger.accountBalance(name, emiTerms);
+        String amount = valueOf(balance.amountPaid());
+        String emiLeft = valueOf(balance.noOfEmisLeft());
+        return new CommandResult(CommandType.PAYMENT, bank, amount, emiLeft);
     }
 
     @Override
@@ -37,7 +40,7 @@ public class PaymentCommand implements Command {
         try {
             return new PaymentCommand(args[1], args[2], parseInt(args[3]), parseInt(args[4]));
         } catch (Exception e) {
-            throw new InvalidCommandException(String.join(" ",args));
+            throw new InvalidCommandException(String.join(" ", args));
         }
     }
 

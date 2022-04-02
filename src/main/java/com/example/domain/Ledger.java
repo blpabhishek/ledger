@@ -35,7 +35,7 @@ public class Ledger {
 
     private Loan searchLoanAccount(String name) throws UnknownUserException {
         if (!accounts.containsKey(name))
-            throw new UnknownUserException();
+            throw new UnknownUserException(name);
         return accounts.get(name);
     }
 

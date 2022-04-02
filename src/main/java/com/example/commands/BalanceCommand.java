@@ -6,6 +6,8 @@ import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
 
+import static java.lang.String.valueOf;
+
 public class BalanceCommand implements Command {
     private final String bank;
     private final String name;
@@ -20,7 +22,9 @@ public class BalanceCommand implements Command {
     @Override
     public CommandResult execute(Ledger ledger) throws UnknownUserException {
         Balance balance = ledger.accountBalance(name, term);
-        return new CommandResult(bank, balance.amountPaid(), balance.noOfEmisLeft());
+        String amount = valueOf(balance.amountPaid());
+        String emiLeft = valueOf(balance.noOfEmisLeft());
+        return new CommandResult(CommandType.BALANCE, bank, amount, emiLeft);
     }
 
     @Override

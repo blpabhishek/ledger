@@ -13,7 +13,7 @@ class LoanCommandTest {
         Ledger ledger = new Ledger("IDI");
         CommandResult commandResult = loanCommand.execute(ledger);
 
-        CommandResult expectedCommandResult = new CommandResult("IDI", 0,12);
+        CommandResult expectedCommandResult = new CommandResult(CommandType.LOAN, "IDI", "0","12");
         assertEquals(expectedCommandResult, commandResult);
     }
 }
