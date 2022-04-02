@@ -1,10 +1,8 @@
 package com.example.domain;
 
-import com.example.commands.CommandResult;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LedgerTest {
     @Test
@@ -19,18 +17,19 @@ public class LedgerTest {
     void ledgerShouldGiveTheStatusForTheGivenUser() throws UnknownUserException {
         Ledger ledger = new Ledger("IDI");
         ledger.addLoan("name", new Loan(2000, 2, 2));
-        CommandResult commandResult = ledger.getBalance("name", 8);
 
-        CommandResult expectedCommandResult = new CommandResult("IDI", 696, 16);
+        Balance balance = ledger.accountBalance("name", 8);
 
-        assertEquals(expectedCommandResult, commandResult);
+        Balance expectedBalance = new Balance(696, 16);
+
+        assertEquals(expectedBalance, balance);
     }
 
     @Test
     void shouldThrowExceptionForUnknownUserBalance() {
         Ledger ledger = new Ledger("IDI");
         assertThrows(UnknownUserException.class,
-                () -> ledger.getBalance("name", 8));
+                () -> ledger.accountBalance("name", 8));
 
     }
 
@@ -38,10 +37,11 @@ public class LedgerTest {
     void shouldAcceptLumSumPaymentForAnExistingUser() throws UnknownUserException {
         Ledger ledger = new Ledger("IDI");
         ledger.addLoan("name", new Loan(1200, 1, 0));
-        CommandResult commandResult = ledger.payment("name", 1000, 2);
 
-        CommandResult expectedCommandResult = new CommandResult("IDI", 1200, 0);
-        assertEquals(expectedCommandResult, commandResult);
+        assertTrue(ledger.payment("name",1000,2));
+
+        Balance expectedBalance = new Balance(1200, 0);
+        assertEquals(expectedBalance, ledger.accountBalance("name",2));
     }
 
     @Test

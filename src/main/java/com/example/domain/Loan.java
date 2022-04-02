@@ -24,9 +24,9 @@ public class Loan {
         return totalAmount() - amountPaid(terms);
     }
 
-    public void addPayment(long lumSumAmount, int afterEmiTerms) {
+    public boolean addPayment(long lumSumAmount, int afterEmiTerms) {
         Payment payment = new Payment(afterEmiTerms, lumSumAmount);
-        this.payments.add(payment);
+        return this.payments.add(payment);
     }
 
     public long amountPaid(int terms) {

@@ -1,5 +1,6 @@
 package com.example.commands;
 
+import com.example.domain.Balance;
 import com.example.domain.Ledger;
 import com.example.domain.UnknownUserException;
 
@@ -18,7 +19,8 @@ public class BalanceCommand implements Command {
 
     @Override
     public CommandResult execute(Ledger ledger) throws UnknownUserException {
-        return ledger.getBalance(name, term);
+        Balance balance = ledger.accountBalance(name, term);
+        return new CommandResult(bank, balance.amountPaid(), balance.noOfEmisLeft());
     }
 
     @Override

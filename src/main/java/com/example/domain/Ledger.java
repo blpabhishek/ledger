@@ -1,7 +1,5 @@
 package com.example.domain;
 
-import com.example.commands.CommandResult;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -21,19 +19,18 @@ public class Ledger {
         return accounts.size();
     }
 
-    public CommandResult getBalance(String name, int terms) throws UnknownUserException {
+    public Balance accountBalance(String name, int terms) throws UnknownUserException {
         Loan loan = searchLoanAccount(name);
-        return new CommandResult(bank, loan.amountPaid(terms), loan.remainingEMI(terms));
+        return new Balance(loan.amountPaid(terms), loan.remainingEMI(terms));
     }
 
     public boolean ofSameBank(String bank) {
         return this.bank.equals(bank);
     }
 
-    public CommandResult payment(String name, int lumSumAmount, int afterEmiTerms) throws UnknownUserException {
+    public boolean payment(String name, int lumSumAmount, int afterEmiTerms) throws UnknownUserException {
         Loan loan = searchLoanAccount(name);
-        loan.addPayment(lumSumAmount, afterEmiTerms);
-        return new CommandResult(bank, loan.amountPaid(afterEmiTerms), loan.remainingEMI(afterEmiTerms));
+        return loan.addPayment(lumSumAmount, afterEmiTerms);
     }
 
     private Loan searchLoanAccount(String name) throws UnknownUserException {

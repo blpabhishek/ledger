@@ -1,5 +1,6 @@
 package com.example.commands;
 
+import com.example.domain.Balance;
 import com.example.domain.Ledger;
 import com.example.domain.Loan;
 import com.example.domain.UnknownUserException;
@@ -26,7 +27,8 @@ public class LoanCommand implements Command {
     public CommandResult execute(Ledger ledger) throws UnknownUserException {
         Loan loan = new Loan(amount, years, terms);
         ledger.addLoan(name, loan);
-        return ledger.getBalance(name, 0);
+        Balance balance = ledger.accountBalance(name, 0);
+        return new CommandResult(bank, balance.amountPaid(), balance.noOfEmisLeft());
     }
 
     @Override
@@ -51,7 +53,7 @@ public class LoanCommand implements Command {
         try {
             return new LoanCommand(args[1], args[2], parseInt(args[3]), parseInt(args[4]), parseInt(args[5]));
         } catch (Exception e) {
-            throw new InvalidCommandException(String.join(" ",args));
+            throw new InvalidCommandException(String.join(" ", args));
         }
     }
 }
