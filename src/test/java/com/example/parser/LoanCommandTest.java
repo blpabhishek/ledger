@@ -13,7 +13,7 @@ class LoanCommandTest {
         Ledger ledger = new Ledger("IDI");
         Status status = loanCommand.execute(ledger);
 
-        Status expectedStatus = new Status(0,12);
+        Status expectedStatus = new Status("IDI", 0,12);
         assertEquals(expectedStatus,status);
     }
 }

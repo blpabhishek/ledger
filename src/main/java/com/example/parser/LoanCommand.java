@@ -3,6 +3,7 @@ package com.example.parser;
 import com.example.domain.Ledger;
 import com.example.domain.Loan;
 import com.example.domain.Status;
+import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
 
@@ -37,7 +38,12 @@ public class LoanCommand implements Command {
     public Status execute(Ledger ledger) {
         Loan loan = new Loan(amount, years, terms);
         ledger.addLoan(name,loan);
-        return ledger.getBalance(name,0);
+        try {
+            return ledger.getBalance(name,0);
+        } catch (UnknownUserException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

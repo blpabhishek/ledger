@@ -19,10 +19,11 @@ public class Ledger {
         return transactions.size();
     }
 
-    public Status getBalance(String name, int terms) {
-        //TODO throw Exception for not found
-        Loan loan = transactions.getOrDefault(name,new Loan(0,1,0));
-        return new Status(loan.amountPaid(terms), loan.remainingEMI(terms));
+    public Status getBalance(String name, int terms) throws UnknownUserException{
+        if(!transactions.containsKey(name))
+            throw new UnknownUserException();
+        Loan loan = transactions.get(name);
+        return new Status(bank, loan.amountPaid(terms), loan.remainingEMI(terms));
     }
 
     @Override

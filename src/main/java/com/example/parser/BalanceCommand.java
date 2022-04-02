@@ -2,6 +2,7 @@ package com.example.parser;
 
 import com.example.domain.Ledger;
 import com.example.domain.Status;
+import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
 
@@ -17,6 +18,16 @@ public class BalanceCommand implements Command{
     }
 
     @Override
+    public Status execute(Ledger ledger) throws UnknownUserException {
+        return ledger.getBalance(name,term);
+    }
+
+    @Override
+    public String getBank() {
+        return bank;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -27,15 +38,5 @@ public class BalanceCommand implements Command{
     @Override
     public int hashCode() {
         return Objects.hash(bank, name, term);
-    }
-
-    @Override
-    public Status execute(Ledger ledger) {
-        return null;
-    }
-
-    @Override
-    public String getBank() {
-        return bank;
     }
 }
