@@ -39,4 +39,9 @@ public class LoanCommand implements Command {
         ledger.addLoan(name,loan);
         return ledger.getBalance(name,0);
     }
+
+    @Override
+    public String getBank() {
+        return this.bank;
+    }
 }

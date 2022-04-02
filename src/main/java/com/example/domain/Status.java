@@ -24,11 +24,4 @@ public class Status {
         return Objects.hash(amountPaid, noOfEMIsLeft);
     }
 
-    @Override
-    public String toString() {
-        return "Status{" +
-                "amountPaid=" + amountPaid +
-                ", noOfEMIsLeft=" + noOfEMIsLeft +
-                '}';
-    }
 }

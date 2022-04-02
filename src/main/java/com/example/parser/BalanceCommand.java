@@ -1,5 +1,8 @@
 package com.example.parser;
 
+import com.example.domain.Ledger;
+import com.example.domain.Status;
+
 import java.util.Objects;
 
 public class BalanceCommand implements Command{
@@ -24,5 +27,15 @@ public class BalanceCommand implements Command{
     @Override
     public int hashCode() {
         return Objects.hash(bank, name, term);
+    }
+
+    @Override
+    public Status execute(Ledger ledger) {
+        return null;
+    }
+
+    @Override
+    public String getBank() {
+        return bank;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.domain;
 
-import com.example.domain.Ledger;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
