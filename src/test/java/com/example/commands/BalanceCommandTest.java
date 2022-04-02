@@ -2,7 +2,6 @@ package com.example.commands;
 
 import com.example.domain.Ledger;
 import com.example.domain.Loan;
-import com.example.domain.Status;
 import com.example.domain.UnknownUserException;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +14,10 @@ class BalanceCommandTest {
         BalanceCommand balanceCommand = new BalanceCommand("IDI", "Bob", 0);
         Ledger ledger = new Ledger("IDI");
         ledger.addLoan("Bob", new Loan(200, 1, 1));
-        Status status = balanceCommand.execute(ledger);
+        CommandResult commandResult = balanceCommand.execute(ledger);
 
-        Status expectedStatus = new Status("IDI", 0, 12);
-        assertEquals(expectedStatus, status);
+        CommandResult expectedCommandResult = new CommandResult("IDI", 0, 12);
+        assertEquals(expectedCommandResult, commandResult);
     }
 
     @Test

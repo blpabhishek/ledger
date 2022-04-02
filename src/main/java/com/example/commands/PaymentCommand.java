@@ -1,7 +1,6 @@
 package com.example.commands;
 
 import com.example.domain.Ledger;
-import com.example.domain.Status;
 import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
@@ -22,7 +21,7 @@ public class PaymentCommand implements Command {
     }
 
     @Override
-    public Status execute(Ledger ledger) throws UnknownUserException {
+    public CommandResult execute(Ledger ledger) throws UnknownUserException {
         return ledger.payment(name, lumSumAmount, emiTerms);
     }
 

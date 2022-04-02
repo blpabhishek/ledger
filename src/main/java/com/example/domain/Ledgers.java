@@ -6,15 +6,15 @@ import java.util.Optional;
 
 public class Ledgers {
 
-    private final List<Ledger> banks = new ArrayList<>();
+    private final List<Ledger> ledgers = new ArrayList<>();
 
     public Ledger getLedger(String bank) {
-        Optional<Ledger> optionalLedger = banks.stream()
-                .filter((x) -> x.isSameBank(bank))
+        Optional<Ledger> optionalLedger = ledgers.stream()
+                .filter((ledger) -> ledger.ofSameBank(bank))
                 .findAny();
         if (optionalLedger.isEmpty()) {
             Ledger ledger = new Ledger(bank);
-            banks.add(ledger);
+            ledgers.add(ledger);
             return ledger;
         }
         return optionalLedger.get();

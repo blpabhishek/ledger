@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import com.example.commands.CommandResult;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,11 +19,11 @@ public class LedgerTest {
     void ledgerShouldGiveTheStatusForTheGivenUser() throws UnknownUserException {
         Ledger ledger = new Ledger("IDI");
         ledger.addLoan("name", new Loan(2000, 2, 2));
-        Status status = ledger.getBalance("name", 8);
+        CommandResult commandResult = ledger.getBalance("name", 8);
 
-        Status expectedStatus = new Status("IDI", 696, 16);
+        CommandResult expectedCommandResult = new CommandResult("IDI", 696, 16);
 
-        assertEquals(expectedStatus, status);
+        assertEquals(expectedCommandResult, commandResult);
     }
 
     @Test
@@ -37,10 +38,10 @@ public class LedgerTest {
     void shouldAcceptLumSumPaymentForAnExistingUser() throws UnknownUserException {
         Ledger ledger = new Ledger("IDI");
         ledger.addLoan("name", new Loan(1200, 1, 0));
-        Status status = ledger.payment("name", 1000, 2);
+        CommandResult commandResult = ledger.payment("name", 1000, 2);
 
-        Status expectedStatus = new Status("IDI", 1200, 0);
-        assertEquals(expectedStatus, status);
+        CommandResult expectedCommandResult = new CommandResult("IDI", 1200, 0);
+        assertEquals(expectedCommandResult, commandResult);
     }
 
     @Test

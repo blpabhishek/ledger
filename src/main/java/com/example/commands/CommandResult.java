@@ -1,13 +1,13 @@
-package com.example.domain;
+package com.example.commands;
 
 import java.util.Objects;
 
-public class Status {
+public class CommandResult {
     private final String bank;
     private final long amountPaid;
     private final int noOfEMIsLeft;
 
-    public Status(String bank, long amountPaid, int noOfEMIsLeft) {
+    public CommandResult(String bank, long amountPaid, int noOfEMIsLeft) {
         this.bank = bank;
         this.amountPaid = amountPaid;
         this.noOfEMIsLeft = noOfEMIsLeft;
@@ -17,8 +17,8 @@ public class Status {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Status status = (Status) o;
-        return amountPaid == status.amountPaid && noOfEMIsLeft == status.noOfEMIsLeft && Objects.equals(bank, status.bank);
+        CommandResult commandResult = (CommandResult) o;
+        return amountPaid == commandResult.amountPaid && noOfEMIsLeft == commandResult.noOfEMIsLeft && Objects.equals(bank, commandResult.bank);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Status {
 
     @Override
     public String toString() {
-        return "Status{" +
+        return "CommandResult{" +
                 "bank='" + bank + '\'' +
                 ", amountPaid=" + amountPaid +
                 ", noOfEMIsLeft=" + noOfEMIsLeft +

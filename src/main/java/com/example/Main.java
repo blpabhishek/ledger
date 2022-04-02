@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.commands.InvalidCommandException;
 import com.example.domain.Ledgers;
-import com.example.domain.Status;
+import com.example.commands.CommandResult;
 import com.example.domain.UnknownUserException;
 import com.example.commands.Command;
 import com.example.parser.InputParser;
@@ -21,8 +21,8 @@ public class Main {
             InputParser inputParser = new InputParser();
             Command command = inputParser.parse(line);
             System.out.println(line);
-            Status status = ledgerService.execute(command);
-            System.out.println(status);
+            CommandResult commandResult = ledgerService.execute(command);
+            System.out.println(commandResult);
         }
     }
 
