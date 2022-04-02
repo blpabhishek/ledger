@@ -3,7 +3,7 @@ package com.example;
 import com.example.domain.Ledgers;
 import com.example.domain.Status;
 import com.example.domain.UnknownUserException;
-import com.example.parser.Command;
+import com.example.commands.Command;
 import com.example.parser.InputParser;
 import com.example.service.LedgerService;
 

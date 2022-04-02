@@ -1,5 +1,8 @@
 package com.example.parser;
 
+import com.example.commands.BalanceCommand;
+import com.example.commands.Command;
+import com.example.commands.LoanCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

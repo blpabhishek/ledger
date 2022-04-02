@@ -1,4 +1,4 @@
-package com.example.parser;
+package com.example.commands;
 
 import com.example.domain.Ledger;
 import com.example.domain.Loan;

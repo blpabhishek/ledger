@@ -1,5 +1,9 @@
 package com.example.parser;
 
+import com.example.commands.BalanceCommand;
+import com.example.commands.Command;
+import com.example.commands.LoanCommand;
+
 public class InputParser {
     public Command parse(String string) {
         String[] strings = string.split(" ");
