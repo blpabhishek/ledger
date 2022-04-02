@@ -35,15 +35,10 @@ public class LoanCommand implements Command {
         return Objects.hash(bank, name, amount, years, terms);
     }
 
-    public Status execute(Ledger ledger) {
+    public Status execute(Ledger ledger) throws UnknownUserException {
         Loan loan = new Loan(amount, years, terms);
-        ledger.addLoan(name,loan);
-        try {
-            return ledger.getBalance(name,0);
-        } catch (UnknownUserException e) {
-            e.printStackTrace();
-        }
-        return null;
+        ledger.addLoan(name, loan);
+        return ledger.getBalance(name, 0);
     }
 
     @Override
