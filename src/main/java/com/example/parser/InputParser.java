@@ -1,18 +1,21 @@
 package com.example.parser;
 
-import com.example.commands.BalanceCommand;
-import com.example.commands.Command;
-import com.example.commands.LoanCommand;
+import com.example.commands.*;
 
 public class InputParser {
-    public Command parse(String string) {
-        String[] strings = string.split(" ");
-        if(strings[0].equals("LOAN"))
-            return new LoanCommand(strings[1], strings[2], toInt(strings[3]), toInt(strings[4]), toInt(strings[5]));
-        return new BalanceCommand(strings[1],strings[2],toInt(strings[3]));
+    public Command parse(String string) throws InvalidCommandException {
+        String[] arguments = string.split(" ");
+        if (arguments.length < 4) {
+            throw new InvalidCommandException();
+        }
+        String commandName = arguments[0];
+        if (commandName.equals("LOAN"))
+            return LoanCommand.toLoanCommand(arguments);
+        if (commandName.equals("PAYMENT"))
+            return PaymentCommand.toPaymentCommand(arguments);
+        if (commandName.equals("BALANCE"))
+            return BalanceCommand.toBalanceCommand(arguments);
+        throw new InvalidCommandException();
     }
 
-    private int toInt(String string) {
-        return Integer.parseInt(string);
-    }
 }

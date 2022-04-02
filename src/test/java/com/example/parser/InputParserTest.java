@@ -1,15 +1,14 @@
 package com.example.parser;
 
-import com.example.commands.BalanceCommand;
-import com.example.commands.Command;
-import com.example.commands.LoanCommand;
+import com.example.commands.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class InputParserTest {
     @Test
-    void shouldBeAbleToParseTheGivenString() {
+    void shouldBeAbleToParseTheGivenString() throws InvalidCommandException {
         String string = "LOAN IDIDI Dale 10000 5 4";
         InputParser inputParser = new InputParser();
         Command lc = inputParser.parse(string);
@@ -20,7 +19,7 @@ public class InputParserTest {
     }
 
     @Test
-    void shouldBeAbleToParseTheGivenBalanceCommand() {
+    void shouldBeAbleToParseTheGivenBalanceCommand() throws InvalidCommandException {
         String string = "BALANCE IDIDI Dale 5";
         InputParser inputParser = new InputParser();
         Command lc = inputParser.parse(string);
@@ -28,5 +27,25 @@ public class InputParserTest {
         Command expected = new BalanceCommand("IDIDI", "Dale", 5);
 
         assertEquals(expected, lc);
+    }
+
+    @Test
+    void shouldBeAbleToParsePaymentCommand() throws InvalidCommandException {
+        String string = "PAYMENT IDIDI Dale 1000 5";
+        InputParser inputParser = new InputParser();
+        Command lc = inputParser.parse(string);
+
+        Command expected = new PaymentCommand("IDIDI", "Dale", 1000,5);
+
+        assertEquals(expected, lc);
+    }
+
+    @Test
+    void shouldThrowInvalidCommandExceptionOnInvalidCommands() {
+        String string = "PAY";
+        InputParser inputParser = new InputParser();
+
+        assertThrows(InvalidCommandException.class,()->inputParser.parse(string));
+
     }
 }

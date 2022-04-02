@@ -7,6 +7,8 @@ import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
 
+import static java.lang.Integer.parseInt;
+
 public class LoanCommand implements Command {
     private final String bank;
     private final String name;
@@ -22,6 +24,17 @@ public class LoanCommand implements Command {
         this.terms = terms;
     }
 
+    public Status execute(Ledger ledger) throws UnknownUserException {
+        Loan loan = new Loan(amount, years, terms);
+        ledger.addLoan(name, loan);
+        return ledger.getBalance(name, 0);
+    }
+
+    @Override
+    public String getBank() {
+        return this.bank;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,14 +48,11 @@ public class LoanCommand implements Command {
         return Objects.hash(bank, name, amount, years, terms);
     }
 
-    public Status execute(Ledger ledger) throws UnknownUserException {
-        Loan loan = new Loan(amount, years, terms);
-        ledger.addLoan(name, loan);
-        return ledger.getBalance(name, 0);
-    }
-
-    @Override
-    public String getBank() {
-        return this.bank;
+    public static LoanCommand toLoanCommand(String[] args) throws InvalidCommandException {
+        try {
+            return new LoanCommand(args[1], args[2], parseInt(args[3]), parseInt(args[4]), parseInt(args[5]));
+        } catch (Exception e) {
+            throw new InvalidCommandException();
+        }
     }
 }

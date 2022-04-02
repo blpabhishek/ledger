@@ -6,7 +6,7 @@ import com.example.domain.UnknownUserException;
 
 import java.util.Objects;
 
-public class BalanceCommand implements Command{
+public class BalanceCommand implements Command {
     private final String bank;
     private final String name;
     private final int term;
@@ -19,12 +19,20 @@ public class BalanceCommand implements Command{
 
     @Override
     public Status execute(Ledger ledger) throws UnknownUserException {
-        return ledger.getBalance(name,term);
+        return ledger.getBalance(name, term);
     }
 
     @Override
     public String getBank() {
         return bank;
+    }
+
+    public static BalanceCommand toBalanceCommand(String[] args) throws InvalidCommandException {
+        try {
+            return new BalanceCommand(args[1], args[2], Integer.parseInt(args[3]));
+        } catch (Exception e) {
+            throw new InvalidCommandException();
+        }
     }
 
     @Override
