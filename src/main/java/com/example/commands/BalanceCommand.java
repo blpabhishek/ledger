@@ -24,7 +24,7 @@ public class BalanceCommand implements Command {
         Balance balance = ledger.accountBalance(name, term);
         String amount = valueOf(balance.amountPaid());
         String emiLeft = valueOf(balance.noOfEmisLeft());
-        return new CommandResult(CommandType.BALANCE, bank, amount, emiLeft);
+        return new BalanceCommandResult(bank, amount, emiLeft);
     }
 
     @Override

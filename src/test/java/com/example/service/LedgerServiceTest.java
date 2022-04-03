@@ -17,7 +17,7 @@ public class LedgerServiceTest {
         TransactionStatus actual = ledgerService.execute(cmd);
 
         TransactionStatus transactionStatus = new TransactionStatus();
-        transactionStatus.setResult(new CommandResult(CommandType.LOAN, "IDI", "0", "12"));
+        transactionStatus.setResult(new CommandResult(CommandType.LOAN));
 
         assertEquals(transactionStatus, actual);
     }

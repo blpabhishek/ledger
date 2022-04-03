@@ -1,16 +1,18 @@
 package com.example.service;
 
+import com.example.commands.BalanceCommandResult;
 import com.example.commands.CommandResult;
+import com.example.commands.CommandType;
 import com.example.parser.Formatter;
 
 import java.util.Objects;
 
 public class TransactionStatus {
     private Exception error;
-    private CommandResult cmdResult;
+    private CommandResult cmdCommandResult;
 
     public TransactionStatus setResult(CommandResult commandResult) {
-        this.cmdResult = commandResult;
+        this.cmdCommandResult = commandResult;
         return this;
     }
 
@@ -23,8 +25,9 @@ public class TransactionStatus {
         if (this.error != null) {
             formatter.println(error.getMessage());
         }
-        if (this.cmdResult != null && this.cmdResult.isBalanceCommand()) {
-            String result = String.format("%s %s %s", cmdResult.getBank(), cmdResult.getAmountPaid(), cmdResult.getNoOfEMIsLeft());
+        if (this.cmdCommandResult != null && cmdCommandResult.isType(CommandType.BALANCE)) {
+            BalanceCommandResult cmd = (BalanceCommandResult) this.cmdCommandResult;
+            String result = String.format("%s %s %s", cmd.getBank(), cmd.getAmountPaid(), cmd.getNoOfEMIsLeft());
             formatter.println(result);
         }
     }
@@ -34,6 +37,6 @@ public class TransactionStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransactionStatus that = (TransactionStatus) o;
-        return Objects.equals(cmdResult, that.cmdResult);
+        return Objects.equals(cmdCommandResult, that.cmdCommandResult);
     }
 }

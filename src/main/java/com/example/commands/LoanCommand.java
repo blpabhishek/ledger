@@ -1,6 +1,5 @@
 package com.example.commands;
 
-import com.example.domain.Balance;
 import com.example.domain.Ledger;
 import com.example.domain.Loan;
 import com.example.domain.UnknownUserException;
@@ -8,7 +7,6 @@ import com.example.domain.UnknownUserException;
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.String.valueOf;
 
 public class LoanCommand implements Command {
     private final String bank;
@@ -28,10 +26,7 @@ public class LoanCommand implements Command {
     public CommandResult execute(Ledger ledger) throws UnknownUserException {
         Loan loan = new Loan(amount, years, terms);
         ledger.addLoan(name, loan);
-        Balance balance = ledger.accountBalance(name, 0);
-        String amount = valueOf(balance.amountPaid());
-        String emiLeft = valueOf(balance.noOfEmisLeft());
-        return new CommandResult(CommandType.LOAN, bank, amount, emiLeft);
+        return new CommandResult(CommandType.LOAN);
     }
 
     @Override
