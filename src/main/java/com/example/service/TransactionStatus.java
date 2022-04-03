@@ -37,8 +37,8 @@ public class TransactionStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransactionStatus that = (TransactionStatus) o;
-        return Objects.equals(error.getMessage(), that.error.getMessage())
-                && Objects.equals(cmdCommandResult, that.cmdCommandResult);
+        if (error != null) return Objects.equals(error.getMessage(), that.error.getMessage());
+        return Objects.equals(cmdCommandResult, that.cmdCommandResult);
     }
 
     @Override
