@@ -5,7 +5,7 @@ Command line app for ledger modelling in Java.
 ### Requirements
 
     gradle > 7.0 
-    java ~ 12
+    java ~ 11
 
 ### Running test
 
