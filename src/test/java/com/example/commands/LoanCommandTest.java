@@ -16,4 +16,9 @@ class LoanCommandTest {
         CommandResult expectedCommandResult = new CommandResult(CommandType.LOAN, "IDI", "0","12");
         assertEquals(expectedCommandResult, commandResult);
     }
+
+    @Test
+    void shouldThrowInvalidExceptionForWrongCommandParsing() {
+        assertThrows(InvalidCommandException.class, () -> LoanCommand.toLoanCommand(new String[]{"1", "2"}));
+    }
 }

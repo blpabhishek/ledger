@@ -5,9 +5,6 @@ import com.example.commands.CommandType;
 import com.example.domain.UnknownUserException;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionStatusTest {
@@ -17,12 +14,7 @@ class TransactionStatusTest {
         TransactionStatus transactionStatus = new TransactionStatus();
         transactionStatus.setResult(new CommandResult(CommandType.BALANCE,"bank","22","12"));
 
-        transactionStatus.print(new PrintStream(new ByteArrayOutputStream()){
-            @Override
-            public void println(String x) {
-                assertEquals("bank 22 12",x);
-            }
-        });
+        transactionStatus.print(x -> assertEquals("bank 22 12",x));
 
     }
 
@@ -31,12 +23,7 @@ class TransactionStatusTest {
         TransactionStatus transactionStatus = new TransactionStatus();
         transactionStatus.setError(new UnknownUserException("name"));
 
-        transactionStatus.print(new PrintStream(new ByteArrayOutputStream()){
-            @Override
-            public void println(String x) {
-                assertEquals("User name not found",x);
-            }
-        });
+        transactionStatus.print(x -> assertEquals("User name not found",x));
 
     }
 }

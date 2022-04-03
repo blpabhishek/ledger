@@ -5,6 +5,8 @@ import com.example.domain.Ledgers;
 import com.example.domain.UnknownUserException;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LedgerServiceTest {
@@ -23,7 +25,7 @@ public class LedgerServiceTest {
     @Test
     void shouldRecordErrorWhileExecutingCommand() {
         LedgerService ledgerService = new LedgerService(new Ledgers());
-        Command cmd = new BalanceCommand("b","n",1);
+        Command cmd = new BalanceCommand("b", "n", 1);
         TransactionStatus actual = ledgerService.execute(cmd);
 
         TransactionStatus transactionStatus = new TransactionStatus();
@@ -32,5 +34,12 @@ public class LedgerServiceTest {
         assertEquals(transactionStatus, actual);
     }
 
+    @Test
+    void shouldReadTheGivenInputFileAndExecuteCommands() throws InvalidCommandException {
+        ArrayList<String> commands = new ArrayList<>();
+        commands.add("LOAN IDIDI Dale 120 1 0");
+        commands.add("BALANCE IDIDI Dale 6");
+        LedgerService.executeCommands(commands, s -> assertEquals("IDIDI 60 6", s));
+    }
 
 }

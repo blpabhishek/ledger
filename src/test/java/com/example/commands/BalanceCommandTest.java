@@ -5,7 +5,8 @@ import com.example.domain.Loan;
 import com.example.domain.UnknownUserException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BalanceCommandTest {
 
@@ -25,6 +26,11 @@ class BalanceCommandTest {
         BalanceCommand balanceCommand = new BalanceCommand("IDI", "Bob", 1);
         Ledger ledger = new Ledger("IDI");
 
-        assertThrows(UnknownUserException.class,()->balanceCommand.execute(ledger));
+        assertThrows(UnknownUserException.class, () -> balanceCommand.execute(ledger));
+    }
+
+    @Test
+    void shouldThrowInvalidExceptionForWrongCommandParsing() {
+        assertThrows(InvalidCommandException.class, () -> BalanceCommand.toBalanceCommand(new String[]{"1", "2"}));
     }
 }

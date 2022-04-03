@@ -38,8 +38,16 @@ public class InputParserTest {
     }
 
     @Test
+    void shouldThrowInvalidCommandExceptionOnInvalidArguments() {
+        String string = "PAYMENT";
+
+        assertThrows(InvalidCommandException.class,()->InputParser.parse(string));
+
+    }
+
+    @Test
     void shouldThrowInvalidCommandExceptionOnInvalidCommands() {
-        String string = "PAY";
+        String string = "PAY IDIDI Dale 1000 1 5";
 
         assertThrows(InvalidCommandException.class,()->InputParser.parse(string));
 

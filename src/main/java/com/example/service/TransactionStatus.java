@@ -1,8 +1,8 @@
 package com.example.service;
 
 import com.example.commands.CommandResult;
+import com.example.parser.Formatter;
 
-import java.io.PrintStream;
 import java.util.Objects;
 
 public class TransactionStatus {
@@ -19,7 +19,7 @@ public class TransactionStatus {
         return this;
     }
 
-    public void print(PrintStream formatter) {
+    public void print(Formatter formatter) {
         if (this.error != null) {
             formatter.println(error.getMessage());
         }

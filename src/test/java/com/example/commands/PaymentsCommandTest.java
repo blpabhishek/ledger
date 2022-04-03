@@ -27,4 +27,9 @@ public class PaymentsCommandTest {
 
         assertThrows(UnknownUserException.class,()->paymentCommand.execute(ledger));
     }
+
+    @Test
+    void shouldThrowInvalidExceptionForWrongCommandParsing() {
+        assertThrows(InvalidCommandException.class, () -> PaymentCommand.toPaymentCommand(new String[]{"1", "2"}));
+    }
 }
