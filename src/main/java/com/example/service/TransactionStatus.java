@@ -27,7 +27,7 @@ public class TransactionStatus {
         }
         if (this.cmdCommandResult != null && cmdCommandResult.isType(CommandType.BALANCE)) {
             BalanceCommandResult cmd = (BalanceCommandResult) this.cmdCommandResult;
-            String result = String.format("%s %s %s", cmd.getBank(), cmd.getAmountPaid(), cmd.getNoOfEMIsLeft());
+            String result = String.format("%s %s %s %s", cmd.getBank(), cmd.getName(), cmd.getAmountPaid(), cmd.getNoOfEMIsLeft());
             formatter.println(result);
         }
     }

@@ -52,7 +52,7 @@ public class LedgerServiceTest {
         commands.add("LOAN IDIDI Dale 120 1 0");
         commands.add("BALANCE IDIDI Dale 6");
         LedgerService ledgerService = new LedgerService(new Ledgers());
-        LedgerService.executeCommands(ledgerService, commands, s -> assertEquals("IDIDI 60 6", s));
+        LedgerService.executeCommands(ledgerService, commands, s -> assertEquals("IDIDI Dale 60 6", s));
     }
 
 }

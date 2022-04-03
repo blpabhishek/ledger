@@ -17,7 +17,7 @@ class BalanceCommandTest {
         ledger.addLoan("Bob", new Loan(200, 1, 1));
         CommandResult commandResult = balanceCommand.execute(ledger);
 
-        BalanceCommandResult expectedCommandResult = new BalanceCommandResult("IDI", "0", "12");
+        BalanceCommandResult expectedCommandResult = new BalanceCommandResult("IDI", "Bob", "0", "12");
         assertEquals(expectedCommandResult, commandResult);
     }
 

@@ -6,12 +6,14 @@ public class BalanceCommandResult extends CommandResult {
     private final String bank;
     private final String amount;
     private final String emiLeft;
+    private final String name;
 
-    public BalanceCommandResult(String bank, String amount, String emiLeft) {
+    public BalanceCommandResult(String bank, String name, String amount, String emiLeft) {
         super(CommandType.BALANCE);
         this.bank = bank;
         this.amount = amount;
         this.emiLeft = emiLeft;
+        this.name = name;
     }
 
     public String getBank() {
@@ -24,6 +26,10 @@ public class BalanceCommandResult extends CommandResult {
 
     public String getNoOfEMIsLeft() {
         return emiLeft;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
