@@ -13,8 +13,8 @@ public class LedgerServiceTest {
     @Test
     void shouldExecuteCommandsOnLedger() {
         LedgerService ledgerService = new LedgerService(new Ledgers());
-        Command cmd = new LoanCommand("IDI", "Bob", 1000, 1, 1);
-        TransactionStatus actual = ledgerService.execute(cmd);
+        String command = "LOAN IDI Bob 1000 1 1";
+        TransactionStatus actual = ledgerService.execute(command);
 
         TransactionStatus transactionStatus = new TransactionStatus();
         transactionStatus.setResult(new CommandResult(CommandType.LOAN));
@@ -25,21 +25,34 @@ public class LedgerServiceTest {
     @Test
     void shouldRecordErrorWhileExecutingCommand() {
         LedgerService ledgerService = new LedgerService(new Ledgers());
-        Command cmd = new BalanceCommand("b", "n", 1);
-        TransactionStatus actual = ledgerService.execute(cmd);
+        String command = "BALANCE IDI Bob 1000 1 1";
+        TransactionStatus actual = ledgerService.execute(command);
 
         TransactionStatus transactionStatus = new TransactionStatus();
-        transactionStatus.setError(new UnknownUserException("n"));
+        transactionStatus.setError(new UnknownUserException("Bob"));
 
         assertEquals(transactionStatus, actual);
     }
 
     @Test
-    void shouldReadTheGivenInputFileAndExecuteCommands() throws InvalidCommandException {
+    void shouldRecordUnknownCommandWhileExecutingCommand() {
+        LedgerService ledgerService = new LedgerService(new Ledgers());
+        String command = "BAL IDI Bob 1000 1 1";
+        TransactionStatus actual = ledgerService.execute(command);
+
+        TransactionStatus transactionStatus = new TransactionStatus();
+        transactionStatus.setError(new InvalidCommandException("BAL IDI Bob 1000 1 1"));
+
+        assertEquals(transactionStatus, actual);
+    }
+
+    @Test
+    void shouldReadTheGivenInputFileAndExecuteCommands() {
         ArrayList<String> commands = new ArrayList<>();
         commands.add("LOAN IDIDI Dale 120 1 0");
         commands.add("BALANCE IDIDI Dale 6");
-        LedgerService.executeCommands(commands, s -> assertEquals("IDIDI 60 6", s));
+        LedgerService ledgerService = new LedgerService(new Ledgers());
+        LedgerService.executeCommands(ledgerService, commands, s -> assertEquals("IDIDI 60 6", s));
     }
 
 }

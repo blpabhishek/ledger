@@ -37,6 +37,12 @@ public class TransactionStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransactionStatus that = (TransactionStatus) o;
-        return Objects.equals(cmdCommandResult, that.cmdCommandResult);
+        return Objects.equals(error.getMessage(), that.error.getMessage())
+                && Objects.equals(cmdCommandResult, that.cmdCommandResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(error, cmdCommandResult);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.commands;
 
-public class InvalidCommandException extends Throwable {
+public class InvalidCommandException extends Exception {
     public InvalidCommandException(String inputCommand) {
         super("Invalid command:" + inputCommand);
     }
