@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Main {
+public class LedgerMain {
     public static void main(String[] args) {
         try {
             String filePath = args[0];
