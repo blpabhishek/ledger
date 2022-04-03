@@ -14,8 +14,8 @@ Command line app for ledger modelling in Java.
 ### Building jar
 
     ./gradlew jar
-Find the jar in build/libs/ledger-co.jar
+Find the jar in build/libs/geektrust.jar
 
 ### How to use
 
-    java -jar build/libs/ledger-co.jar <src/main/resources/transactions-1.txt>
+    java -jar build/libs/geektrust.jar <src/main/resources/transactions-1.txt>

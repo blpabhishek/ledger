@@ -16,6 +16,7 @@ test{
 }
 
 jar {
+    archiveBaseName = 'geektrust' //Please do not change this final artifact name
     manifest {
         attributes "Main-Class": "com.example.LedgerMain"
     }
